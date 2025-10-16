@@ -30,7 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.labelSize = new System.Windows.Forms.Label();
             this.labelFile = new System.Windows.Forms.Label();
             this.buttonGray = new System.Windows.Forms.Button();
@@ -38,29 +37,18 @@
             this.buttonLSB = new System.Windows.Forms.Button();
             this.buttonLSBGraf = new System.Windows.Forms.Button();
             this.buttonOrigImage = new System.Windows.Forms.Button();
+            this.buttonPhoto = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
             // 
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox1.Location = new System.Drawing.Point(272, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(300, 303);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 12);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(151, 24);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Выберите фото";
             // 
             // labelSize
             // 
@@ -132,11 +120,22 @@
             this.buttonOrigImage.UseVisualStyleBackColor = true;
             this.buttonOrigImage.Click += new System.EventHandler(this.buttonOrigImage_Click);
             // 
+            // buttonPhoto
+            // 
+            this.buttonPhoto.Location = new System.Drawing.Point(19, 28);
+            this.buttonPhoto.Name = "buttonPhoto";
+            this.buttonPhoto.Size = new System.Drawing.Size(179, 37);
+            this.buttonPhoto.TabIndex = 9;
+            this.buttonPhoto.Text = "Выбрать файл";
+            this.buttonPhoto.UseVisualStyleBackColor = true;
+            this.buttonPhoto.Click += new System.EventHandler(this.buttonPhoto_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(584, 375);
+            this.Controls.Add(this.buttonPhoto);
             this.Controls.Add(this.buttonOrigImage);
             this.Controls.Add(this.buttonLSBGraf);
             this.Controls.Add(this.buttonLSB);
@@ -144,7 +143,6 @@
             this.Controls.Add(this.buttonGray);
             this.Controls.Add(this.labelFile);
             this.Controls.Add(this.labelSize);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -160,7 +158,6 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label labelSize;
         private System.Windows.Forms.Label labelFile;
         private System.Windows.Forms.Button buttonGray;
@@ -168,5 +165,6 @@
         private System.Windows.Forms.Button buttonLSB;
         private System.Windows.Forms.Button buttonLSBGraf;
         private System.Windows.Forms.Button buttonOrigImage;
+        private System.Windows.Forms.Button buttonPhoto;
     }
 }

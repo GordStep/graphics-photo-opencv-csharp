@@ -20,28 +20,7 @@ namespace graphics_photo_opencv
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = "PNG|*.png|JPG|*.jpg;*.jpeg";
 
-            if (ofd.ShowDialog() == DialogResult.OK)
-            {
-                pictureBox1.Image = Image.FromFile(ofd.FileName);
-                pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-                //pictureBox1.Size = pictureBox1.Image.Size;
-                //label1.Visible = false;
-                labelSize.Text = $"Размер фото: {pictureBox1.Image.Width}, {pictureBox1.Image.Height}";
-
-                labelFile.Text = $"Название файла: {ofd.FileName.Substring(ofd.FileName.LastIndexOf('\\') + 1)}";
-
-                if (pictureBox1.Image != null)
-                {
-                    buttonGist.Enabled = true;
-                    buttonLSB.Enabled = true;
-                    buttonLSBGraf.Enabled = true;
-                    buttonGray.Enabled = true;
-                    buttonOrigImage.Enabled = true;
-                }
-            }
         }
         private void buttonGray_Click(object sender, EventArgs e)
         {
@@ -73,7 +52,6 @@ namespace graphics_photo_opencv
             using (var ms = mat.ToMemoryStream())
             {
                 return (Bitmap)Image.FromStream(ms);
-
             }
         }
 
@@ -98,6 +76,32 @@ namespace graphics_photo_opencv
         {
             Form2 formOrigImage = new Form2(pictureBox1.Image, "Оригинальное изображение");
             formOrigImage.Show();
+        }
+
+        private void buttonPhoto_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "PNG|*.png|JPG|*.jpg;*.jpeg";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                pictureBox1.Image = Image.FromFile(ofd.FileName);
+                pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+                //pictureBox1.Size = pictureBox1.Image.Size;
+                //label1.Visible = false;
+                labelSize.Text = $"Размер фото: {pictureBox1.Image.Width}, {pictureBox1.Image.Height}";
+
+                labelFile.Text = $"Название файла: {ofd.FileName.Substring(ofd.FileName.LastIndexOf('\\') + 1)}";
+
+                if (pictureBox1.Image != null)
+                {
+                    buttonGist.Enabled = true;
+                    //buttonLSB.Enabled = true;
+                    buttonLSBGraf.Enabled = true;
+                    buttonGray.Enabled = true;
+                    buttonOrigImage.Enabled = true;
+                }
+            }
         }
     }
 }
