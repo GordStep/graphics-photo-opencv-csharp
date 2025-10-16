@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Weavers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="FodyWeavers.xsd">
+  <Costura>
+    <!-- Встроить все управляемые сборки по умолчанию -->
+    <!-- Указать нативные dll для 32 и 64 бит -->
+    <Unmanaged32Assemblies>
+			OpenCvSharpExtern.dll;opencv_videoio_ffmpeg4110.dll
+		</Unmanaged32Assemblies>
+    <Unmanaged64Assemblies>
+			OpenCvSharpExtern.dll;opencv_videoio_ffmpeg4110.dll
+		</Unmanaged64Assemblies>
+    <!-- Опция: распаковать библиотеки во временную папку (по умолчанию так и происходит) -->
+    <CreateTemporaryAssemblies>true</CreateTemporaryAssemblies>
+  </Costura>
+</Weavers>

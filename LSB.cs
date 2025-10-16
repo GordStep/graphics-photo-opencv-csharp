@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,71 +16,85 @@ namespace graphics_photo_opencv
     {
         public static string ImageToStr(Image image)
         {
-            string result = "";
-
-            if (image == null) return result;
+            if (image == null) return "";
 
             Bitmap bmp = new Bitmap(image);
 
             string message = "";
-            //string buff = "011000110110000101110100"; // cat
             string buff = "";
 
             int i, j;
             Color color;
-            MessageBox.Show($"start");
+
+            File.WriteAllText("output.txt", "");
+            StreamWriter output = new StreamWriter(@"output.txt", true);
+            
             // Проходим по изображению и добавляем 1 в R, G, B по индексу оттенка
             for (i = 0; i < bmp.Height; i++)
                 for (j = 0; j < bmp.Width; j++)
                 {
-                    color = bmp.GetPixel(j, i);
+                    color = bmp.GetPixel(j, i); // Получаем пиксель
 
-                    byte r = color.R;
-                    byte g = color.G;
-                    byte b = color.B;
-
+                    // Переводим значение каждого оттенка в бинарный вид, который запишем с помощью строки
                     var redBinary = Convert.ToString(color.R, 2).PadLeft(8, '0');
                     var greenBinary = Convert.ToString(color.G, 2).PadLeft(8, '0');
                     var blueBinary = Convert.ToString(color.B, 2).PadLeft(8, '0');
 
-                    //MessageBox.Show($"{redBinary} {greenBinary} {blueBinary}");
-
-                    var lBitR = redBinary.Substring(6);
+                    // Выделяем младшие биты каждого цвета
+                    var lBitR = redBinary.Substring(6); 
                     var lBitG = greenBinary.Substring(6);
                     var lBitB = blueBinary.Substring(6);
 
-                    buff += lBitR + lBitG + lBitB;
+                    buff += lBitR + lBitG + lBitB; // Добавляем в буфер младшие биты текущего пикселя
 
                     //MessageBox.Show(buff);
 
-                    if (buff.Length >= 256)
+                    // При заполнении буфера 8ю символами обрабатываем их и добавляем с строке
+                    if (buff.Length >= 36 * 8)
                     {
-                        //MessageBox.Show(buff);
-                        for (int ind = 0; ind < buff.Length / 8; ind += 8)
+                        int ind;
+                        for (ind = 0; ind < buff.Length / 8; ind += 8)
                         {
-                            string binChar = buff.Substring(ind, 8);
-                            Char c = (Char)Convert.ToInt16(binChar, 2);
+                            string binChar = buff.Substring(ind, 8); // выделяем подстроку в 8 бит (1 символ)
+                            Char c = (Char)Convert.ToInt16(binChar, 2); // выделяем подстроку в 8 бит (1 символ)
                             message += c.ToString();
-                            MessageBox.Show($"{c} {(int)c} {binChar}");
+                            //MessageBox.Show($"{c} {(int)c} {binChar}");
                         }
 
-                        buff = buff.Substring(255);
-                    }
+                        buff = buff.Substring(ind);
 
-                    //MessageBox.Show(message);
+                        // Чтобы не работать с большой строкой, мы записываем в файл информацию строками длиной 1000 символов
+                        if (message.Length >= 1000)
+                        {
+                            output.Write(message);
+                            message = ""; // Зануляем строку
+                        }
+                    }
                 }
+
+            // Обрабатываем оставшийся буффер символов
             for (int ind = 0; ind < buff.Length / 8; ind += 8)
             {
-                string binChar = buff.Substring(ind, 8);
-                Char c = (Char)Convert.ToInt16(binChar, 2);
+                string binChar = buff.Substring(ind, 8); // выделяем подстроку в 8 бит (1 символ)
+                Char c = (Char)Convert.ToInt16(binChar, 2); // выделяем подстроку в 8 бит (1 символ)
                 message += c.ToString();
-                //MessageBox.Show($"{c} {(int)c} {binChar}");
+
+                //MessageBox.Show($"{c} {(int)c} {binChar}"); // проверка работы
             }
 
+            output.Write(message);
+            output.Close();
+            //MessageBox.Show("finish\n");
 
-            MessageBox.Show("finish\n" + message);
+            // Записываем результат в файл
+            //try { 
+            //    File.WriteAllText("output.txt", message); 
+            //}
+            //catch (Exception ex) { MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); }
 
-            return result;
+            MessageBox.Show("Расшифровка завершена, результат записан в файл output.txt", "Завершено", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            return message;
         }
 
         public static void GainLowBits(Image image)

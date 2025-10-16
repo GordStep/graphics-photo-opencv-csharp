@@ -17,11 +17,6 @@ namespace graphics_photo_opencv
         {
             InitializeComponent();
         }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
         private void buttonGray_Click(object sender, EventArgs e)
         {
             pictureBox1.Image.Save("OriginalImage.PNG");
@@ -96,7 +91,7 @@ namespace graphics_photo_opencv
                 if (pictureBox1.Image != null)
                 {
                     buttonGist.Enabled = true;
-                    //buttonLSB.Enabled = true;
+                    buttonLSB.Enabled = true;
                     buttonLSBGraf.Enabled = true;
                     buttonGray.Enabled = true;
                     buttonOrigImage.Enabled = true;
