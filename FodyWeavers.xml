@@ -4,11 +4,11 @@
     <!-- Встроить все управляемые сборки по умолчанию -->
     <!-- Указать нативные dll для 32 и 64 бит -->
     <Unmanaged32Assemblies>
-			OpenCvSharpExtern.dll;opencv_videoio_ffmpeg4110.dll
+			OpenCvSharpExtern.dll;OpenCvSharp.dll
 		</Unmanaged32Assemblies>
     <Unmanaged64Assemblies>
-			OpenCvSharpExtern.dll;opencv_videoio_ffmpeg4110.dll
-		</Unmanaged64Assemblies>
+		OpenCvSharpExtern.dll;OpenCvSharp.dll
+	</Unmanaged64Assemblies>
     <!-- Опция: распаковать библиотеки во временную папку (по умолчанию так и происходит) -->
     <CreateTemporaryAssemblies>true</CreateTemporaryAssemblies>
   </Costura>
