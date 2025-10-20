@@ -38,6 +38,7 @@
             this.buttonLSBGraf = new System.Windows.Forms.Button();
             this.buttonOrigImage = new System.Windows.Forms.Button();
             this.buttonPhoto = new System.Windows.Forms.Button();
+            this.labelLog = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -45,7 +46,7 @@
             // 
             this.pictureBox1.Location = new System.Drawing.Point(272, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(300, 303);
+            this.pictureBox1.Size = new System.Drawing.Size(300, 284);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -130,11 +131,21 @@
             this.buttonPhoto.UseVisualStyleBackColor = true;
             this.buttonPhoto.Click += new System.EventHandler(this.buttonPhoto_Click);
             // 
+            // labelLog
+            // 
+            this.labelLog.AutoSize = true;
+            this.labelLog.Location = new System.Drawing.Point(16, 302);
+            this.labelLog.Name = "labelLog";
+            this.labelLog.Size = new System.Drawing.Size(59, 13);
+            this.labelLog.TabIndex = 10;
+            this.labelLog.Text = "Лог лабел";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(584, 375);
+            this.Controls.Add(this.labelLog);
             this.Controls.Add(this.buttonPhoto);
             this.Controls.Add(this.buttonOrigImage);
             this.Controls.Add(this.buttonLSBGraf);
@@ -166,5 +177,6 @@
         private System.Windows.Forms.Button buttonLSBGraf;
         private System.Windows.Forms.Button buttonOrigImage;
         private System.Windows.Forms.Button buttonPhoto;
+        private System.Windows.Forms.Label labelLog;
     }
 }

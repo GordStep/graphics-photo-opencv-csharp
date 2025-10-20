@@ -197,8 +197,8 @@
     <Error Condition="!Exists('packages\Costura.Fody.6.0.0\build\Costura.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Costura.Fody.6.0.0\build\Costura.Fody.props'))" />
     <Error Condition="!Exists('packages\Costura.Fody.6.0.0\build\Costura.Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Costura.Fody.6.0.0\build\Costura.Fody.targets'))" />
     <Error Condition="!Exists('packages\Tools.InnoSetup.6.4.3\build\Tools.InnoSetup.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Tools.InnoSetup.6.4.3\build\Tools.InnoSetup.props'))" />
-    <Error Condition="!Exists('packages\OpenCvSharp4.runtime.win.4.11.0.20250507\build\net48\OpenCvSharp4.runtime.win.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\OpenCvSharp4.runtime.win.4.11.0.20250507\build\net48\OpenCvSharp4.runtime.win.props'))" />
     <Error Condition="!Exists('packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets'))" />
+    <Error Condition="!Exists('packages\OpenCvSharp4.runtime.win.4.11.0.20250507\build\net48\OpenCvSharp4.runtime.win.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\OpenCvSharp4.runtime.win.4.11.0.20250507\build\net48\OpenCvSharp4.runtime.win.props'))" />
   </Target>
   <Import Project="packages\Fody.6.9.3\build\Fody.targets" Condition="Exists('packages\Fody.6.9.3\build\Fody.targets')" />
   <Import Project="packages\Costura.Fody.6.0.0\build\Costura.Fody.targets" Condition="Exists('packages\Costura.Fody.6.0.0\build\Costura.Fody.targets')" />

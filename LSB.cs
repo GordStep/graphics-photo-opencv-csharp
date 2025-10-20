@@ -128,7 +128,7 @@ namespace graphics_photo_opencv
 
             FormImageViewer FormImageViewer = new FormImageViewer(gainMap, "Усиление младших битов");
             FormImageViewer.Show();
-            gainMap.Save("GistPict.png");
+            gainMap.Save("GainLowBitsPict.png");
         }
     }
 }
