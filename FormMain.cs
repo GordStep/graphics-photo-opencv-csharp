@@ -12,6 +12,8 @@ namespace graphics_photo_opencv
         {
             InitializeComponent();
         }
+
+        // Создание серой версии изображения
         private void buttonGray_Click(object sender, EventArgs e)
         {
             pictureBox1.Image.Save("OriginalImage.PNG");
@@ -35,11 +37,14 @@ namespace graphics_photo_opencv
             LabelLogShow("Серое изображение сохранено в файл \"GrayImage.png\"");
         }
 
+        // Построение гистограммы изображения
         private void buttonGist_Click(object sender, EventArgs e)
         {
             Histogram histogram = new Histogram(pictureBox1.Image);
             histogram.Show();
         }
+
+        // Разшифровка сообщения в файле
         private void buttonLSB_Click(object sender, EventArgs e)
         {
             LSB.ImageToStr(pictureBox1.Image);
@@ -55,6 +60,7 @@ namespace graphics_photo_opencv
             }
         }
 
+        // Создание графика изображения с усилением младших битов
         private void buttonLSBGraf_Click(object sender, EventArgs e)
         {
             LSB.GainLowBits(pictureBox1.Image);

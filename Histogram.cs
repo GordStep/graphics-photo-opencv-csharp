@@ -23,6 +23,7 @@ namespace graphics_photo_opencv
 
                 int[] X = new int[256];
                 for (int k = 0; k < 256; k++) X[k] = k;
+
                 int[] R = new int[256];
                 int[] G = new int[256];
                 int[] B = new int[256];
@@ -112,6 +113,7 @@ namespace graphics_photo_opencv
                 chart3.Series[0].MarkerSize = 2;
                 chart3.Series[0].MarkerColor = Color.Blue;
 
+                // Задаём цвет линий
                 chart1.Series[0].Color = Color.Red;
                 chart2.Series[0].Color = Color.Green;
                 chart3.Series[0].Color = Color.Blue;

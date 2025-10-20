@@ -11,7 +11,7 @@ namespace graphics_photo_opencv
         {
             InitializeComponent();
             this.selectImage = selectImage;
-            this.Text = windowName;
+            this.Text = windowName; // Название окна 
         }
 
         private void FormImageViewer_Load(object sender, EventArgs e)
