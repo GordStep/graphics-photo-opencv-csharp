@@ -126,8 +126,8 @@ namespace graphics_photo_opencv
                     gainMap.SetPixel(i, j, Color.FromArgb(uR, uG, uB));
                 }
 
-            Form2 form2 = new Form2(gainMap, "Усиление младших битов");
-            form2.Show();
+            FormImageViewer FormImageViewer = new FormImageViewer(gainMap, "Усиление младших битов");
+            FormImageViewer.Show();
             gainMap.Save("GistPict.png");
         }
     }

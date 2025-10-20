@@ -4,17 +4,17 @@ using System.Windows.Forms;
 
 namespace graphics_photo_opencv
 {
-    public partial class Form2 : Form
+    public partial class FormImageViewer : Form
     {
         Image selectImage;
-        public Form2(Image selectImage, string windowName)
+        public FormImageViewer(Image selectImage, string windowName)
         {
             InitializeComponent();
             this.selectImage = selectImage;
             this.Text = windowName;
         }
 
-        private void Form2_Load(object sender, EventArgs e)
+        private void FormImageViewer_Load(object sender, EventArgs e)
         {
             this.Size = selectImage.Size;
             pictureBox1.Image = selectImage;

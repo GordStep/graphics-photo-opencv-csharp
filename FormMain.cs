@@ -22,7 +22,7 @@ namespace graphics_photo_opencv
             Image grayImage = MatToBitmap(grayIm);
             grayImage.Save("GrayImage.PNG");
 
-            Form2 formGray = new Form2(grayImage, "Серое изображение");
+            FormImageViewer formGray = new FormImageViewer(grayImage, "Серое изображение");
             formGray.Show();
         }
 
@@ -63,7 +63,7 @@ namespace graphics_photo_opencv
 
         private void buttonOrigImage_Click(object sender, EventArgs e)
         {
-            Form2 formOrigImage = new Form2(pictureBox1.Image, "Оригинальное изображение");
+            FormImageViewer formOrigImage = new FormImageViewer(pictureBox1.Image, "Оригинальное изображение");
             formOrigImage.Show();
         }
 
