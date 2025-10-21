@@ -47,9 +47,16 @@ namespace graphics_photo_opencv
         // Разшифровка сообщения в файле
         private void buttonLSB_Click(object sender, EventArgs e)
         {
-            LSB.ImageToStr(pictureBox1.Image);
+            try
+            {
+                LSB.ImageToStr(pictureBox1.Image);
 
-            LabelLogShow("Рассшифрованный текст сохранен в файл \"output.txt\"");
+                LabelLogShow("Рассшифрованный текст сохранен в файл \"output.txt\"");
+            } 
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошика!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private static Bitmap MatToBitmap(Mat mat)

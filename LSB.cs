@@ -14,19 +14,22 @@ namespace graphics_photo_opencv
 {
     internal class LSB
     {
-        public static string ImageToStr(Image image)
+        public static void ImageToStr(Image image)
         {
-            if (image == null) return "";
+            if (image == null) throw new Exception("image is null");
 
             Bitmap bmp = new Bitmap(image);
 
             string message = "";
             string buff = "";
 
+            int countLetters = 0;
+            bool countNumber = false;
+
             int i, j;
             Color color;
 
-            File.WriteAllText("output.txt", "");
+            File.Delete("output.txt");
             StreamWriter output = new StreamWriter(@"output.txt", true);
             
             // Проходим по изображению и добавляем 1 в R, G, B по индексу оттенка
@@ -49,8 +52,8 @@ namespace graphics_photo_opencv
 
                     //MessageBox.Show(buff);
 
-                    // При заполнении буфера 8ю символами обрабатываем их и добавляем с строке
-                    if (buff.Length >= 36 * 8)
+                    // При заполнении буфера 16ю символами обрабатываем их и добавляем с строке
+                    if (buff.Length >= 36 * 8 * 2)
                     {
                         int ind;
                         for (ind = 0; ind < buff.Length / 8; ind += 8)
@@ -62,39 +65,33 @@ namespace graphics_photo_opencv
                         }
 
                         buff = buff.Substring(ind);
-
-                        // Чтобы не работать с большой строкой, мы записываем в файл информацию строками длиной 1000 символов
-                        if (message.Length >= 1000)
-                        {
-                            output.Write(message);
-                            message = ""; // Зануляем строку
-                        }
                     }
+
+
+                    // Чтобы не работать с большой строкой, мы записываем в файл информацию строками длиной 1000 символов
+                    if (message.Length >= 1000)
+                    {
+                        output.Write(message);
+                        message = ""; // Зануляем строку
+                    }
+
                 }
 
             // Обрабатываем оставшийся буффер символов
             for (int ind = 0; ind < buff.Length / 8; ind += 8)
             {
                 string binChar = buff.Substring(ind, 8); // выделяем подстроку в 8 бит (1 символ)
-                Char c = (Char)Convert.ToInt16(binChar, 2); // выделяем подстроку в 8 бит (1 символ)
+                Char c = (Char)Convert.ToInt16(binChar, 2); // переводим двоичную строку в число 
                 message += c.ToString();
 
                 //MessageBox.Show($"{c} {(int)c} {binChar}"); // проверка работы
             }
 
+            // Дозаписываем остаток данных в файл
             output.Write(message);
             output.Close();
-            //MessageBox.Show("finish\n");
-
-            // Записываем результат в файл
-            //try { 
-            //    File.WriteAllText("output.txt", message); 
-            //}
-            //catch (Exception ex) { MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-
+            
             MessageBox.Show("Расшифровка завершена, результат записан в файл output.txt", "Завершено", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            return message;
         }
 
         public static void GainLowBits(Image image)
