@@ -39,14 +39,16 @@
             this.buttonOrigImage = new System.Windows.Forms.Button();
             this.buttonPhoto = new System.Windows.Forms.Button();
             this.labelLog = new System.Windows.Forms.Label();
+            this.linkLabelCode = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(272, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(363, 15);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(300, 284);
+            this.pictureBox1.Size = new System.Drawing.Size(400, 350);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -55,9 +57,10 @@
             // 
             this.labelSize.AutoSize = true;
             this.labelSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSize.Location = new System.Drawing.Point(16, 326);
+            this.labelSize.Location = new System.Drawing.Point(21, 401);
+            this.labelSize.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelSize.Name = "labelSize";
-            this.labelSize.Size = new System.Drawing.Size(97, 16);
+            this.labelSize.Size = new System.Drawing.Size(127, 20);
             this.labelSize.TabIndex = 2;
             this.labelSize.Text = "Размер фото:";
             // 
@@ -65,17 +68,19 @@
             // 
             this.labelFile.AutoEllipsis = true;
             this.labelFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelFile.Location = new System.Drawing.Point(16, 342);
+            this.labelFile.Location = new System.Drawing.Point(21, 421);
+            this.labelFile.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelFile.Name = "labelFile";
-            this.labelFile.Size = new System.Drawing.Size(556, 23);
+            this.labelFile.Size = new System.Drawing.Size(517, 28);
             this.labelFile.TabIndex = 3;
             this.labelFile.Text = "Название файла:";
             // 
             // buttonGray
             // 
-            this.buttonGray.Location = new System.Drawing.Point(19, 114);
+            this.buttonGray.Location = new System.Drawing.Point(25, 134);
+            this.buttonGray.Margin = new System.Windows.Forms.Padding(4);
             this.buttonGray.Name = "buttonGray";
-            this.buttonGray.Size = new System.Drawing.Size(179, 37);
+            this.buttonGray.Size = new System.Drawing.Size(239, 46);
             this.buttonGray.TabIndex = 4;
             this.buttonGray.Text = "Серое изображение";
             this.buttonGray.UseVisualStyleBackColor = true;
@@ -83,9 +88,10 @@
             // 
             // buttonGist
             // 
-            this.buttonGist.Location = new System.Drawing.Point(19, 157);
+            this.buttonGist.Location = new System.Drawing.Point(25, 187);
+            this.buttonGist.Margin = new System.Windows.Forms.Padding(4);
             this.buttonGist.Name = "buttonGist";
-            this.buttonGist.Size = new System.Drawing.Size(179, 37);
+            this.buttonGist.Size = new System.Drawing.Size(239, 46);
             this.buttonGist.TabIndex = 5;
             this.buttonGist.Text = "Гистограмма";
             this.buttonGist.UseVisualStyleBackColor = true;
@@ -93,9 +99,10 @@
             // 
             // buttonLSB
             // 
-            this.buttonLSB.Location = new System.Drawing.Point(19, 200);
+            this.buttonLSB.Location = new System.Drawing.Point(25, 240);
+            this.buttonLSB.Margin = new System.Windows.Forms.Padding(4);
             this.buttonLSB.Name = "buttonLSB";
-            this.buttonLSB.Size = new System.Drawing.Size(179, 37);
+            this.buttonLSB.Size = new System.Drawing.Size(239, 46);
             this.buttonLSB.TabIndex = 6;
             this.buttonLSB.Text = "Получение текста (LSB)";
             this.buttonLSB.UseVisualStyleBackColor = true;
@@ -103,9 +110,10 @@
             // 
             // buttonLSBGraf
             // 
-            this.buttonLSBGraf.Location = new System.Drawing.Point(19, 243);
+            this.buttonLSBGraf.Location = new System.Drawing.Point(25, 293);
+            this.buttonLSBGraf.Margin = new System.Windows.Forms.Padding(4);
             this.buttonLSBGraf.Name = "buttonLSBGraf";
-            this.buttonLSBGraf.Size = new System.Drawing.Size(179, 37);
+            this.buttonLSBGraf.Size = new System.Drawing.Size(239, 46);
             this.buttonLSBGraf.TabIndex = 7;
             this.buttonLSBGraf.Text = "Усиление младших битов";
             this.buttonLSBGraf.UseVisualStyleBackColor = true;
@@ -113,9 +121,10 @@
             // 
             // buttonOrigImage
             // 
-            this.buttonOrigImage.Location = new System.Drawing.Point(19, 71);
+            this.buttonOrigImage.Location = new System.Drawing.Point(25, 81);
+            this.buttonOrigImage.Margin = new System.Windows.Forms.Padding(4);
             this.buttonOrigImage.Name = "buttonOrigImage";
-            this.buttonOrigImage.Size = new System.Drawing.Size(179, 37);
+            this.buttonOrigImage.Size = new System.Drawing.Size(239, 46);
             this.buttonOrigImage.TabIndex = 8;
             this.buttonOrigImage.Text = "Оригинальное изображение";
             this.buttonOrigImage.UseVisualStyleBackColor = true;
@@ -123,9 +132,10 @@
             // 
             // buttonPhoto
             // 
-            this.buttonPhoto.Location = new System.Drawing.Point(19, 28);
+            this.buttonPhoto.Location = new System.Drawing.Point(25, 28);
+            this.buttonPhoto.Margin = new System.Windows.Forms.Padding(4);
             this.buttonPhoto.Name = "buttonPhoto";
-            this.buttonPhoto.Size = new System.Drawing.Size(179, 37);
+            this.buttonPhoto.Size = new System.Drawing.Size(239, 46);
             this.buttonPhoto.TabIndex = 9;
             this.buttonPhoto.Text = "Выбрать файл";
             this.buttonPhoto.UseVisualStyleBackColor = true;
@@ -134,17 +144,32 @@
             // labelLog
             // 
             this.labelLog.AutoSize = true;
-            this.labelLog.Location = new System.Drawing.Point(16, 302);
+            this.labelLog.Location = new System.Drawing.Point(21, 372);
+            this.labelLog.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelLog.Name = "labelLog";
-            this.labelLog.Size = new System.Drawing.Size(59, 13);
+            this.labelLog.Size = new System.Drawing.Size(73, 16);
             this.labelLog.TabIndex = 10;
             this.labelLog.Text = "Лог лабел";
             // 
+            // linkLabelCode
+            // 
+            this.linkLabelCode.AutoSize = true;
+            this.linkLabelCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkLabelCode.Location = new System.Drawing.Point(594, 421);
+            this.linkLabelCode.Name = "linkLabelCode";
+            this.linkLabelCode.Size = new System.Drawing.Size(165, 18);
+            this.linkLabelCode.TabIndex = 11;
+            this.linkLabelCode.TabStop = true;
+            this.linkLabelCode.Text = "Исходный код(GitHub)";
+            this.linkLabelCode.VisitedLinkColor = System.Drawing.Color.DarkGray;
+            this.linkLabelCode.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelCode_LinkClicked);
+            // 
             // FormMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 375);
+            this.ClientSize = new System.Drawing.Size(779, 462);
+            this.Controls.Add(this.linkLabelCode);
             this.Controls.Add(this.labelLog);
             this.Controls.Add(this.buttonPhoto);
             this.Controls.Add(this.buttonOrigImage);
@@ -157,6 +182,7 @@
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FormMain";
             this.Text = "Лабораторная работа: Графика";
             this.Load += new System.EventHandler(this.FormMain_Load);
@@ -178,5 +204,6 @@
         private System.Windows.Forms.Button buttonOrigImage;
         private System.Windows.Forms.Button buttonPhoto;
         private System.Windows.Forms.Label labelLog;
+        private System.Windows.Forms.LinkLabel linkLabelCode;
     }
 }

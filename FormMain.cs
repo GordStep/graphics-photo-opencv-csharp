@@ -1,5 +1,6 @@
 ﻿using OpenCvSharp;
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -127,6 +128,31 @@ namespace graphics_photo_opencv
         {
             labelLog.Text = message;
             labelLog.Visible = true;
+        }
+
+        private void linkLabelCode_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                VisitLink();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Не получилось открыть ссылку.\n" + ex.Message, "Ошибка.");
+            }
+        }
+        private void VisitLink()
+        {
+            // Отмечаем, что ссылка посещена
+            linkLabelCode.LinkVisited = true;
+
+            // Открываем ссылку
+            using (Process p = new Process())
+            {
+                p.StartInfo.FileName = "https://github.com/GordStep/graphics-photo-opencv-csharp"; // название сайта
+                p.StartInfo.UseShellExecute = true;
+                p.Start();
+            }
         }
     }
 }
