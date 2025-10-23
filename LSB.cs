@@ -23,9 +23,6 @@ namespace graphics_photo_opencv
             string message = "";
             string buff = "";
 
-            int countLetters = 0;
-            bool countNumber = false;
-
             int i, j;
             Color color;
 
