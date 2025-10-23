@@ -17,42 +17,48 @@ namespace graphics_photo_opencv
         // Создание серой версии изображения
         private void buttonGray_Click(object sender, EventArgs e)
         {
-            //pictureBox1.Image.Save("OriginalImage.PNG");
-            //Mat imageRGB = new Mat("OriginalImage.PNG");
-
-            //try
-            //{
-            //    File.Delete("OriginalImage.PNG");
-            //} catch (Exception ex) { MessageBox.Show(ex.Message, "Ошибка"); }
-
-            //Mat grayIm = imageRGB;
-            //Cv2.CvtColor(imageRGB, grayIm, ColorConversionCodes.BGR2GRAY); // Преобразование изображния с помощью библитеки OpenCV
-
-            //Image grayImage = MatToBitmap(grayIm);
-            //grayImage.Save("GrayImage.png");
-
-            //// Отображаем серое фото
-            //FormImageViewer formGray = new FormImageViewer(grayImage, "Серое изображение OpenCV");
-            //formGray.Show();
-
-
-
-            // Код для серого изображения без использования OpenCV
-            Bitmap grayImageBit = new Bitmap(pictureBox1.Image);
-
-            for (int i = 0; i < grayImageBit.Width; i++)
+            // Если не удаётся воспользоваться OpenCV, то используем .NET
+            try
             {
-                for (int j = 0; j < grayImageBit.Height; j++)
-                {
-                    Color pixel = grayImageBit.GetPixel(i, j);
-                    int intensity = (int)(0.299 * pixel.R + 0.587 * pixel.G + 0.114 * pixel.B);
-                    Color grayscaleColor = Color.FromArgb(intensity, intensity, intensity);
-                    grayImageBit.SetPixel(i, j, grayscaleColor);
-                }
-            }
+                pictureBox1.Image.Save("OriginalImage.PNG");
+                Mat imageRGB = new Mat("OriginalImage.PNG");
 
-            FormImageViewer formV = new FormImageViewer(grayImageBit, "Серое изображение .NET");
-            formV.Show();
+                try
+                {
+                    File.Delete("OriginalImage.PNG");
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message, "Ошибка"); }
+
+                Mat grayIm = imageRGB;
+                Cv2.CvtColor(imageRGB, grayIm, ColorConversionCodes.BGR2GRAY); // Преобразование изображния с помощью библитеки OpenCV
+
+                Image grayImage = MatToBitmap(grayIm);
+                grayImage.Save("GrayImage.png");
+
+                // Отображаем серое фото
+                FormImageViewer formGray = new FormImageViewer(grayImage, "Серое изображение OpenCV");
+                formGray.Show();
+            }
+            catch
+            { // Код для серого изображения без использования OpenCV
+                Bitmap grayImageBit = new Bitmap(pictureBox1.Image);
+
+                for (int i = 0; i < grayImageBit.Width; i++)
+                {
+                    for (int j = 0; j < grayImageBit.Height; j++)
+                    {
+                        Color pixel = grayImageBit.GetPixel(i, j);
+                        int intensity = (int)(0.299 * pixel.R + 0.587 * pixel.G + 0.114 * pixel.B);
+                        Color grayscaleColor = Color.FromArgb(intensity, intensity, intensity);
+                        grayImageBit.SetPixel(i, j, grayscaleColor);
+                    }
+                }
+
+                FormImageViewer formV = new FormImageViewer(grayImageBit, "Серое изображение .NET");
+                formV.Show();
+
+                grayImageBit.Save("GrayImage.png");
+            }
 
             LabelLogShow("Серое изображение сохранено в файл \"GrayImage.png\"");
         }
