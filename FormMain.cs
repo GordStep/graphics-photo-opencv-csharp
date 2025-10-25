@@ -34,7 +34,7 @@ namespace graphics_photo_opencv
                 Cv2.CvtColor(imageRGB, grayIm, ColorConversionCodes.BGR2GRAY); // Преобразование изображния с помощью библитеки OpenCV
 
                 Image grayImage = MatToBitmap(grayIm);
-                grayImage.Save("GrayImage.png");
+                //grayImage.Save("GrayImage.png");
 
                 // Отображаем серое фото
                 FormImageViewer formGray = new FormImageViewer(grayImage, "Серое изображение OpenCV");
@@ -67,7 +67,7 @@ namespace graphics_photo_opencv
 
             saveToolStripMenuItem.Enabled = true;
             saveAsToolStripMenuItem.Enabled = true;
-            LabelLogShow("Серое изображение сохранено в файл \"GrayImage.png\"");
+            //LabelLogShow("Серое изображение сохранено в файл \"GrayImage.png\"");
         }
 
         // Построение гистограммы изображения
@@ -85,7 +85,7 @@ namespace graphics_photo_opencv
                 LSB.ImageToStr(pictureBox1.Image, this);
 
                 setValueProgressBarMain(0);
-                LabelLogShow("Рассшифрованный текст сохранен в файл \"output.txt\"");
+                //LabelLogShow("Рассшифрованный текст сохранен в файл \"output.txt\"");
             } 
             catch (Exception ex)
             {
@@ -106,7 +106,7 @@ namespace graphics_photo_opencv
         {
             LSB.GainLowBits(pictureBox1.Image);
 
-            LabelLogShow("Изображение с усиленными младшими битами сохранено в файл \"GainLowBitsPict.png\"");
+            //LabelLogShow("Изображение с усиленными младшими битами сохранено в файл \"GainLowBitsPict.png\"");
         }
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -119,7 +119,7 @@ namespace graphics_photo_opencv
                 buttonGray.Enabled = false;
                 buttonOrigImage.Enabled = false;
 
-                labelLog.Visible = false;
+                //labelLog.Visible = false;
 
                 progressBar1.Visible = false;
 
@@ -163,15 +163,69 @@ namespace graphics_photo_opencv
         //    }
         //}
 
-        private void LabelLogShow(string message)
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            labelLog.Text = message;
-            labelLog.Visible = true;
+            OpenScript();
         }
 
-        
+        public void setValueProgressBarMain(int value)
+        {
+            if (value == 0 && progressBar1.Visible)
+                progressBar1.Visible = false;
 
-        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+            if (value > 0 && progressBar1.Visible == false)
+                progressBar1.Visible = true;
+
+            progressBar1.Value = value;
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            grayImageForSave.Save("GrayImage.png");
+        }
+
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string fileName = "";
+            string dirInfo = Directory.GetCurrentDirectory();
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+
+            saveFileDialog.DefaultExt = "png";
+            saveFileDialog.Title = "Сохранить серое изображение";
+            saveFileDialog.Filter = "Файлы изображений (*.png)|*.png|(*.jpeg)|*.jpeg";
+            // saveFileDialog.FileName = comboBox1.SelectedItem.ToString();
+            saveFileDialog.FileName = $"GrayImage.png";
+
+
+            DialogResult result = saveFileDialog.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                fileName = saveFileDialog.FileName;// Сохранить имя файла
+                //File.Delete(fileName);
+                grayImageForSave.Save(fileName);
+            }
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            pictureBox1.Image = null;
+            FormMain_Load(sender, e);
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormInfo formInfo = new FormInfo();
+            formInfo.Show();
+        }
+
+        private void buttonOpen_Click(object sender, EventArgs e)
+        {
+            OpenScript();
+        }
+
+        public void OpenScript()
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "PNG|*.png|JPG|*.jpg;*.jpeg";
@@ -194,63 +248,12 @@ namespace graphics_photo_opencv
                     buttonGray.Enabled = true;
                     buttonOrigImage.Enabled = true;
 
-                    labelLog.Visible = false;
+                    //labelLog.Visible = false;
 
-                    
+
                     deleteToolStripMenuItem.Enabled = true;
                 }
             }
-        }
-
-        public void setValueProgressBarMain(int value)
-        {
-            if (value == 0 && progressBar1.Visible)
-                progressBar1.Visible = false;
-
-            if (value > 0 && progressBar1.Visible == false)
-                progressBar1.Visible = true;
-
-            progressBar1.Value = value;
-        }
-
-        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SaveFileDialog ofd = new SaveFileDialog();
-        }
-
-        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            string fileName = "";
-            string dirInfo = Directory.GetCurrentDirectory();
-
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-
-            saveFileDialog.DefaultExt = "png";
-            saveFileDialog.Title = "Сохранить серое изображение";
-            saveFileDialog.Filter = "Файлы изображений (*.png)|*.png|(*.jpeg)|*.jpeg";
-            // saveFileDialog.FileName = comboBox1.SelectedItem.ToString();
-            saveFileDialog.FileName = $"GrayImage.png";
-
-
-            DialogResult result = saveFileDialog.ShowDialog();
-
-            if (result == DialogResult.OK)
-            {
-                fileName = saveFileDialog.FileName;// Сохранить имя файла
-                grayImageForSave.Save(fileName);
-            }
-        }
-
-        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            pictureBox1.Image = null;
-            FormMain_Load(sender, e);
-        }
-
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FormInfo formInfo = new FormInfo();
-            formInfo.Show();
         }
     }
 }

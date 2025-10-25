@@ -26,6 +26,8 @@ namespace graphics_photo_opencv
 
             pictureBoxIcon.Image = Properties.Resources.ImageIcon;
             pictureBoxIcon.SizeMode = PictureBoxSizeMode.Zoom;
+
+            labelVersion.Text = $"Версия: {ProductVersion}";
         }
 
         private void linkLabelCode_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
