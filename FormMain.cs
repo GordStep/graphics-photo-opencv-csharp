@@ -9,6 +9,7 @@ namespace graphics_photo_opencv
 {
     public partial class FormMain : Form
     {
+        Image grayImageForSave;
         public FormMain()
         {
             InitializeComponent();
@@ -38,9 +39,12 @@ namespace graphics_photo_opencv
                 // Отображаем серое фото
                 FormImageViewer formGray = new FormImageViewer(grayImage, "Серое изображение OpenCV");
                 formGray.Show();
+
+                grayImageForSave = grayImage;
             }
             catch
-            { // Код для серого изображения без использования OpenCV
+            { 
+                // Код для серого изображения без использования OpenCV
                 Bitmap grayImageBit = new Bitmap(pictureBox1.Image);
 
                 for (int i = 0; i < grayImageBit.Width; i++)
@@ -57,9 +61,12 @@ namespace graphics_photo_opencv
                 FormImageViewer formV = new FormImageViewer(grayImageBit, "Серое изображение .NET");
                 formV.Show();
 
-                grayImageBit.Save("GrayImage.png");
+                //grayImageBit.Save("GrayImage.png");
+                grayImageForSave = grayImageBit;
             }
 
+            saveToolStripMenuItem.Enabled = true;
+            saveAsToolStripMenuItem.Enabled = true;
             LabelLogShow("Серое изображение сохранено в файл \"GrayImage.png\"");
         }
 
@@ -75,8 +82,9 @@ namespace graphics_photo_opencv
         {
             try
             {
-                LSB.ImageToStr(pictureBox1.Image);
+                LSB.ImageToStr(pictureBox1.Image, this);
 
+                setValueProgressBarMain(0);
                 LabelLogShow("Рассшифрованный текст сохранен в файл \"output.txt\"");
             } 
             catch (Exception ex)
@@ -112,6 +120,12 @@ namespace graphics_photo_opencv
                 buttonOrigImage.Enabled = false;
 
                 labelLog.Visible = false;
+
+                progressBar1.Visible = false;
+
+                saveAsToolStripMenuItem.Enabled = false;
+                saveToolStripMenuItem.Enabled = false;
+                deleteToolStripMenuItem.Enabled = false;
             }
         }
 
@@ -121,7 +135,43 @@ namespace graphics_photo_opencv
             formOrigImage.Show();
         }
 
-        private void buttonPhoto_Click(object sender, EventArgs e)
+        //private void buttonPhoto_Click(object sender, EventArgs e)
+        //{
+        //    OpenFileDialog ofd = new OpenFileDialog();
+        //    ofd.Filter = "PNG|*.png|JPG|*.jpg;*.jpeg";
+
+        //    if (ofd.ShowDialog() == DialogResult.OK)
+        //    {
+        //        pictureBox1.Image = Image.FromFile(ofd.FileName);
+        //        pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+
+        //        labelSize.Text = $"Размер фото: {pictureBox1.Image.Width}, {pictureBox1.Image.Height}";
+
+        //        labelFile.Text = $"Название файла: {ofd.FileName.Substring(ofd.FileName.LastIndexOf('\\') + 1)}";
+
+        //        // Включаем кнопки и убираем лог запись
+        //        if (pictureBox1.Image != null)
+        //        {
+        //            buttonGist.Enabled = true;
+        //            buttonLSB.Enabled = true;
+        //            buttonLSBGraf.Enabled = true;
+        //            buttonGray.Enabled = true;
+        //            buttonOrigImage.Enabled = true;
+
+        //            labelLog.Visible = false;
+        //        }
+        //    }
+        //}
+
+        private void LabelLogShow(string message)
+        {
+            labelLog.Text = message;
+            labelLog.Visible = true;
+        }
+
+        
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
             ofd.Filter = "PNG|*.png|JPG|*.jpg;*.jpeg";
@@ -145,39 +195,62 @@ namespace graphics_photo_opencv
                     buttonOrigImage.Enabled = true;
 
                     labelLog.Visible = false;
+
+                    
+                    deleteToolStripMenuItem.Enabled = true;
                 }
             }
         }
 
-        private void LabelLogShow(string message)
+        public void setValueProgressBarMain(int value)
         {
-            labelLog.Text = message;
-            labelLog.Visible = true;
+            if (value == 0 && progressBar1.Visible)
+                progressBar1.Visible = false;
+
+            if (value > 0 && progressBar1.Visible == false)
+                progressBar1.Visible = true;
+
+            progressBar1.Value = value;
         }
 
-        private void linkLabelCode_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
+            SaveFileDialog ofd = new SaveFileDialog();
+        }
+
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string fileName = "";
+            string dirInfo = Directory.GetCurrentDirectory();
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+
+            saveFileDialog.DefaultExt = "png";
+            saveFileDialog.Title = "Сохранить серое изображение";
+            saveFileDialog.Filter = "Файлы изображений (*.png)|*.png|(*.jpeg)|*.jpeg";
+            // saveFileDialog.FileName = comboBox1.SelectedItem.ToString();
+            saveFileDialog.FileName = $"GrayImage.png";
+
+
+            DialogResult result = saveFileDialog.ShowDialog();
+
+            if (result == DialogResult.OK)
             {
-                VisitLink();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Не получилось открыть ссылку.\n" + ex.Message, "Ошибка.");
+                fileName = saveFileDialog.FileName;// Сохранить имя файла
+                grayImageForSave.Save(fileName);
             }
         }
-        private void VisitLink()
-        {
-            // Отмечаем, что ссылка посещена
-            linkLabelCode.LinkVisited = true;
 
-            // Открываем ссылку
-            using (Process p = new Process())
-            {
-                p.StartInfo.FileName = "https://github.com/GordStep/graphics-photo-opencv-csharp"; // название сайта
-                p.StartInfo.UseShellExecute = true;
-                p.Start();
-            }
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            pictureBox1.Image = null;
+            FormMain_Load(sender, e);
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormInfo formInfo = new FormInfo();
+            formInfo.Show();
         }
     }
 }

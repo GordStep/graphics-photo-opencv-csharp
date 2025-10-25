@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,12 +15,14 @@ namespace graphics_photo_opencv
 {
     internal class LSB
     {
-        public static void ImageToStr(Image image)
+        public static void ImageToStr(Image image, FormMain owner)
         {
             if (image == null) throw new Exception("image is null");
 
             Bitmap bmp = new Bitmap(image);
 
+            int totalCountPixels = bmp.Height * bmp.Width;
+            
             string message = "";
             string buff = "";
 
@@ -28,9 +31,10 @@ namespace graphics_photo_opencv
 
             File.Delete("output.txt");
             StreamWriter output = new StreamWriter(@"output.txt", true);
-            
+
             // Проходим по изображению и добавляем 1 в R, G, B по индексу оттенка
             for (i = 0; i < bmp.Height; i++)
+            {
                 for (j = 0; j < bmp.Width; j++)
                 {
                     color = bmp.GetPixel(j, i); // Получаем пиксель
@@ -41,7 +45,7 @@ namespace graphics_photo_opencv
                     var blueBinary = Convert.ToString(color.B, 2).PadLeft(8, '0');
 
                     // Выделяем младшие биты каждого цвета
-                    var lBitR = redBinary.Substring(6); 
+                    var lBitR = redBinary.Substring(6);
                     var lBitG = greenBinary.Substring(6);
                     var lBitB = blueBinary.Substring(6);
 
@@ -71,8 +75,11 @@ namespace graphics_photo_opencv
                         output.Write(message);
                         message = ""; // Зануляем строку
                     }
-
                 }
+
+                owner.setValueProgressBarMain((int)(i * 1.0 / bmp.Height * 100));
+                //MessageBox.Show($"{(i * 1.0 / bmp.Height) * 100}");
+            }
 
             // Обрабатываем оставшийся буффер символов
             for (int ind = 0; ind < buff.Length / 8; ind += 8)
